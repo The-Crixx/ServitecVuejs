@@ -1,86 +1,12 @@
 <template>
-  <div>
-    <header class="bg-primary text-white text-center py-3">
-      <h1>Bienvenido a ServiTec, {{ username }}</h1>
-    </header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="principal.php">ServiTec</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Departamentos
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="departamento.php?id=dp1">Centro de Computo</a>
-                <a class="dropdown-item" href="departamento.php?id=dp2">Alfabetización de Adultos Mayores</a>
-                <a class="dropdown-item" href="departamento.php?id=dp3">Huertos Urbanos</a>
-                <a class="dropdown-item" href="departamento.php?id=dp4">Brigadista</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="docs.html">Guía para Documentos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="interes.php">Interés</a>
-            </li>
-            <li v-if="isAdmin" class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="adminDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Administrador
-              </a>
-              <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                <a class="dropdown-item" href="admin.php">Usuario</a>
-                <a class="dropdown-item" href="comentarios.php">Comentarios</a>
-              </div>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="logout.php">Cerrar sesión</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-md-4 mb-4" v-for="card in cards" :key="card.title">
-          <div class="card h-100">
-            <img :src="card.image" class="card-img-top" :alt="card.alt" />
-            <div class="card-body">
-              <h5 class="card-title">{{ card.title }}</h5>
-              <p class="card-text">{{ card.text }}</p>
-              <a :href="card.link" class="btn btn-primary">Leer más</a>
-            </div>
-          </div>
+  <div class="container mx-auto p-6">
+    <div class="flex-container">
+      <div v-for="departamento in departamentos" :key="departamento.id" class="card">
+        <img :src="departamento.img" :alt="departamento.titulo" class="card-img">
+        <div class="card-body">
+          <h5 class="card-title">{{ departamento.titulo }}</h5>
+          <p class="card-text">{{ departamento.descripcion }}</p>
+          <router-link :to="departamento.link" class="btn">Leer más</router-link>
         </div>
       </div>
     </div>
@@ -91,50 +17,68 @@
 export default {
   data() {
     return {
-      username: "Usuario", // Replace with dynamic data as needed
-      isAdmin: false, // Replace with dynamic data as needed
-      cards: [
-        {
-          image: "img/lab.jpeg",
-          alt: "Centro de Computo",
-          title: "Centro de Computo",
-          text: "Información sobre el Centro de Computo.",
-          link: "dlab.html",
-        },
-        {
-          image: "img/ivea.png",
-          alt: "Alfabetización de Adultos Mayores",
-          title: "Alfabetización de Adultos Mayores",
-          text: "Información sobre la Alfabetización de Adultos Mayores.",
-          link: "divea.html",
-        },
-        {
-          image: "img/huertos.jpeg",
-          alt: "Huertos Urbanos",
-          title: "Huertos Urbanos",
-          text: "Información sobre los Huertos Urbanos.",
-          link: "dhuert.html",
-        },
-        {
-          image: "img/brigadas.png",
-          alt: "Brigadista",
-          title: "Brigadista",
-          text: "Información sobre el trabajo de Brigadista.",
-          link: "dbrig.html",
-        },
-        {
-          image: "img/docs.jpg",
-          alt: "Guía para Documentos",
-          title: "Guía para Documentos",
-          text: "Información sobre la guía para documentos necesarios.",
-          link: "docs.html",
-        },
-      ],
+      departamentos: [
+        { id: 1, titulo: "Centro de Computo", descripcion: "Información sobre el Centro de Computo.", img: "img/lab.jpeg", link: "/dlab" },
+        { id: 2, titulo: "Alfabetización de Adultos Mayores", descripcion: "Información sobre la Alfabetización de Adultos Mayores.", img: "img/ivea.png", link: "/divea" },
+        { id: 3, titulo: "Huertos Urbanos", descripcion: "Información sobre los Huertos Urbanos.", img: "img/huertos.jpeg", link: "/dhuert" },
+        { id: 4, titulo: "Brigadista", descripcion: "Información sobre el trabajo de Brigadista.", img: "img/brigadas.png", link: "/dbrig" },
+        { id: 5, titulo: "Guía para Documentos", descripcion: "Información sobre la guía para documentos necesarios.", img: "img/docs.jpg", link: "/docs" }
+      ]
     };
-  },
+  }
 };
 </script>
 
 <style scoped>
-/* Add any scoped styles here if needed */
+.container {
+  max-width: 100%;
+}
+.flex-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten si no caben en una línea */
+  justify-content: center; /* Centra los elementos horizontalmente */
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  width: 300px; /* Define un ancho fijo para las tarjetas */
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card-body {
+  padding: 16px;
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.card-text {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 12px;
+}
+.btn {
+  display: inline-block;
+  background-color: #1d4ed8;
+  color: white;
+  padding: 10px 16px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.btn:hover {
+  background-color: #1e40af;
+}
 </style>
