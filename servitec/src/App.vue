@@ -1,13 +1,13 @@
 <template>
-  <TestComponent />
+  <Admin />
 </template>
 
 <script>
-import TestComponent from './components/TestComponent.vue';
+import Admin from './components/Admin.vue';
 
 export default {
   components: {
-    TestComponent,
+    Admin,
   },
 };
 </script>
