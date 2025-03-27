@@ -55,7 +55,7 @@ export default {
           console.log('Respuesta del servidor:', response.data);
           if (response.data.success) {
             alert('Usuario actualizado correctamente');
-            this.$emit('user-updated', this.form); // Emite el usuario actualizado al componente padre
+            this.$emit('user-updated', { ...this.form }); // Emite el usuario actualizado al componente padre
             this.$emit('close'); // Cierra el modal
           } else {
             alert('Error al actualizar el usuario: ' + response.data.error);
