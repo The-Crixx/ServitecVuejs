@@ -1,34 +1,40 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-
-include("conexion.php");
-
-// Decodifica los datos JSON enviados en la solicitud
-$data = json_decode(file_get_contents('php://input'), true);
-$id = $data['id'];
-
-$response = [];
-
-try {
-    $query = "DELETE FROM comentarios WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->execute([$id]);
-
-    if ($stmt->rowCount() > 0) {
-        $response['success'] = true;
-    } else {
-        $response['success'] = false;
-        $response['error'] = 'No se encontró el comentario con el ID proporcionado.';
-    }
-} catch (PDOException $e) {
-    $response['success'] = false;
-    $response['error'] = $e->getMessage();
-}
-
+// filepath: c:\xampp\htdocs\vue\php\delete_comments.php
 header('Content-Type: application/json');
-echo json_encode($response);
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 
-$conn = null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($input['id'])) {
+        $id = intval($input['id']);
+
+        // Conexión a la base de datos
+        $conn = new mysqli('localhost', 'root', '', 'servitec');
+
+        if ($conn->connect_error) {
+            echo json_encode(['success' => false, 'error' => 'Error de conexión a la base de datos']);
+            exit;
+        }
+
+        // Consulta para eliminar el comentario
+        $stmt = $conn->prepare('DELETE FROM comentarios WHERE id_comentario = ?');
+        $stmt->bind_param('i', $id);
+
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Error al ejecutar la consulta']);
+        }
+
+        $stmt->close();
+        $conn->close();
+    } else {
+        echo json_encode(['success' => false, 'error' => 'ID no proporcionado']);
+    }
+} else {
+    echo json_encode(['success' => false, 'error' => 'Método no permitido']);
+}
 ?>

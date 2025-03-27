@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Admincomment from './components/docs.vue';
+import Admincomment from './components/Admincomment.vue';
 
 export default {
   components: {
@@ -11,3 +11,9 @@ export default {
   },
 };
 </script>
+
+<style>
+body{
+  background-color: white;
+}
+</style>
