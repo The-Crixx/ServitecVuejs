@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Admincomment from './components/Admincomment.vue';
+import Admincomment from './components/docs.vue';
 
 export default {
   components: {

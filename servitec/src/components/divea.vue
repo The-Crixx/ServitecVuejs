@@ -48,7 +48,7 @@
       mostrarInteres() {
         const departamento = "Departamento de IVEA";
         const return_url = window.location.href;
-        fetch("http://localhost/ServitecVuejs/php/get_interes.php", {
+        fetch("http://localhost/vue/php/get_interes.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ departamento, return_url })

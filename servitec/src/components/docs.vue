@@ -14,7 +14,7 @@
       <h2 class="subtitle">Ubicación del Departamento</h2>
       <p>A continuación, se muestra una imagen con la ubicación del departamento:</p>
       <div class="image-container">
-        <img src="/img/ofi.jpeg" alt="Ubicación de servicio social" class="location-image">
+        <img src="./img/ofi.jpeg" alt="Ubicación de servicio social" class="location-image">
       </div>
     </div>
     <router-link to="/" class="back-button">Regresar</router-link>
