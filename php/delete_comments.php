@@ -7,14 +7,14 @@ include("conexion.php");
 
 // Decodifica los datos JSON enviados en la solicitud
 $data = json_decode(file_get_contents('php://input'), true);
-$id_comentario = $data['id'];
+$id = $data['id'];
 
 $response = [];
 
 try {
-    $query = "DELETE FROM comentarios WHERE id_comentario = ?";
+    $query = "DELETE FROM comentarios WHERE id = ?";
     $stmt = $conn->prepare($query);
-    $stmt->execute([$id_comentario]);
+    $stmt->execute([$id]);
 
     if ($stmt->rowCount() > 0) {
         $response['success'] = true;

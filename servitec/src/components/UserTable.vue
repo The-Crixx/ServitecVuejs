@@ -1,7 +1,6 @@
 <!-- filepath: c:\xampp\htdocs\vue\servitec\src\components\UserTable.vue -->
 <template>
   <div>
-    <h2>Usuarios</h2>
     <table class="table">
       <thead>
         <tr>
@@ -27,6 +26,7 @@
         </tr>
       </tbody>
     </table>
+    <br>
     <button class="btn btn-success" @click="$emit('open-add-modal')">Agregar Usuario</button>
   </div>
 </template>
@@ -128,6 +128,8 @@ button.btn-danger {
   background-color: #dc3545; /* Rojo */
   color: #ffffff;
   border: none;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 button.btn-danger:hover {
@@ -158,5 +160,141 @@ table tr:nth-child(even) {
 
 table tr:hover {
   background-color: #e6f7ff; /* Azul claro */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-header h5 {
+  font-size: 1.5rem;
+  color: #003366;
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-form {
+  background-color: #f7f7f7; /* Fondo gris claro para el formulario */
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-control {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+}
+
+.form-control:disabled {
+  background-color: #eeeeee; /* Fondo gris claro para campos deshabilitados */
+  color: #666666; /* Texto gris */
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Botón de modificar */
+button.btn-primary {
+  background-color: #003366; /* Azul oscuro */
+  color: #ffffff;
+  border: none;
+  margin-right: 10px; /* Espacio entre los botones */
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+button.btn-primary:hover {
+  background-color: #00509e; /* Azul más claro */
+}
+
+.btn-secondary {
+  background-color: #cccccc;
+  color: #333333;
+}
+
+.btn-secondary:hover {
+  background-color: #aaaaaa;
+}
+
+/* Botón de agregar usuario */
+button.btn-success {
+  background: linear-gradient(90deg, #28a745, #218838); /* Degradado verde */
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transición para animaciones */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+button.btn-success:hover {
+  background: linear-gradient(90deg, #218838, #1e7e34); /* Degradado más oscuro */
+  transform: scale(1.05); /* Crece ligeramente */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+button.btn-success:active {
+  transform: scale(0.95); /* Se reduce ligeramente al hacer clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más pequeña */
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
-  <Admin />
+  <Admincomment />
 </template>
 
 <script>
-import Admin from './components/Admin.vue';
+import Admincomment from './components/Admincomment.vue';
 
 export default {
   components: {
-    Admin,
+    Admincomment,
   },
 };
 </script>
