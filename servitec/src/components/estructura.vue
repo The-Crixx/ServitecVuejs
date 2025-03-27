@@ -12,7 +12,7 @@ const showDropdown = ref(false);
       <nav class="navbar">
         <div class="logo">ServiTec</div>
         <div class="nav-links">
-          <router-link to="/" class="nav-link">Inicio</router-link>
+          <router-link to="/Dashboard" class="nav-link">Inicio</router-link>
           <div class="nav-link dropdown" @mouseover="showDropdown = true" @mouseleave="showDropdown = false">
             Servicios
             <div v-if="showDropdown" class="dropdown-menu">
@@ -25,7 +25,7 @@ const showDropdown = ref(false);
           <router-link to="/agendar" class="nav-link">Agendar Cita</router-link>
           <router-link to="/contacto" class="nav-link">Contacto</router-link>
         </div>
-        <router-link to="/php/logout.php" class="logout">Cerrar sesión</router-link>
+        <router-link to="/" class="logout">Cerrar sesión</router-link>
       </nav>
     </header>
   </div>

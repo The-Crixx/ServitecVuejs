@@ -1,118 +1,142 @@
 <template>
-  <div class="app-container">
-    <h1 class="header">Administración de usuarios</h1>
-    <div>
-      <UserTable
-        ref="userTable"
-        @edit-user="handleEditUser"
-        @open-add-modal="showAddModal = true"
-      />
+    <div class="admin-dashboard">
+      <h1>Panel de Administración</h1>
+      <div class="admin-info">
+        <p>Bienvenido, Administrador</p>
+        <p>Número de Control: {{ adminControlNumber }}</p>
+      </div>
       
-      <!-- Transición para el modal de agregar usuario -->
-      <transition name="modal">
-        <div v-if="showAddModal" class="modal-wrapper">
-          <AddUserModal
-            @user-added="handleUserAdded"
-            @close="showAddModal = false"
-          />
+      <div class="admin-actions">
+        <h2>Acciones de Administrador</h2>
+        <div class="action-buttons">
+          <button @click="manageUsers">Gestionar Usuarios</button>
+          <button @click="viewReports">Gestionar Comentarios</button>
         </div>
-      </transition>
-
-      <!-- Transición para el modal de editar usuario -->
-      <transition name="modal">
-        <div v-if="showEditModal" class="modal-wrapper">
-          <EditUserModal
-            :user="selectedUser"
-            @user-updated="handleUserUpdated"
-            @close="showEditModal = false"
-          />
-        </div>
-      </transition>
+      </div>
+  
+      <router-view></router-view>
+  
+      <button @click="logout" class="logout-button">Cerrar Sesión</button>
     </div>
-  </div>
-</template>
+  </template>
+  
+  <script setup>
+  import { ref, onMounted } from 'vue'
+  import { useRouter } from 'vue-router'
+  
+  const router = useRouter()
+  
+  // Datos de ejemplo para el administrador
+  const adminControlNumber = ref(localStorage.getItem('nctrl') || 'N/A')
+  const totalUsers = ref(50)
+  const activeUsers = ref(38)
+  const inactiveUsers = ref(12)
+  
+  // Métodos de acciones de administrador
+  const manageUsers = () => {
+    // Lógica para gestionar usuarios
+    router.push('/Admintabla')
+    alert('Funcionalidad de gestión de usuarios')
+  }
+  
+  const viewReports = () => {
+    // Lógica para ver reportes
+    alert('Funcionalidad de reportes')
+    router.push('/Admincomments')
+  }
 
-<script>
-import UserTable from './UserTable.vue';
-import AddUserModal from './AddUserModal.vue';
-import EditUserModal from './EditUserModal.vue';
-
-export default {
-  components: {
-    UserTable,
-    AddUserModal,
-    EditUserModal,
-  },
-  data() {
-    return {
-      showAddModal: false,
-      showEditModal: false,
-      selectedUser: null,
-    };
-  },
-  methods: {
-    handleEditUser(user) {
-      this.selectedUser = user;
-      this.showEditModal = true;
-    },
-    handleUserAdded(newUser) {
-      this.$refs.userTable.addUser(newUser); // Llama al método `addUser` del componente UserTable
-      this.showAddModal = false;
-    },
-    handleUserUpdated(updatedUser) {
-      this.$refs.userTable.updateUser(updatedUser); // Llama al método `updateUser` del componente UserTable
-      this.showEditModal = false;
-    },
-  },
-};
-</script>
-
-<style>
-/* Estilos globales */
-body {
-  background-color: #ffffff;
-}
-
-.app-container {
-  background-color: #ffffff; /* Fondo blanco */
-  color: #003366; /* Texto azul oscuro */
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
-
-/* Estilo del encabezado */
-.header {
-  text-align: center;
-  color: #003366; /* Azul oscuro */
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-/* Animaciones para los modales */
-.modal-enter-active, .modal-leave-active {
-  transition: all 0.5s ease;
-}
-.modal-enter {
-  opacity: 0;
-  transform: scale(0.9);
-}
-.modal-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-/* Estilo adicional para el contenedor del modal */
-.modal-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-}
-</style>
+  const logout = () => {
+    // Limpiar datos de localStorage
+    localStorage.removeItem('username')
+    localStorage.removeItem('nctrl')
+    
+    // Redireccionar a login
+    router.push('/')
+  }
+  
+  // Ejemplo de cómo podrías cargar datos al montar el componente
+  onMounted(() => {
+    // Aquí podrías hacer una llamada a tu backend para obtener estadísticas reales
+    console.log('Admin dashboard mounted')
+  })
+  </script>
+  
+  <style scoped>
+  .admin-dashboard {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .admin-info {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-actions {
+    margin-bottom: 30px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .action-buttons button {
+    background-color: rgb(24,57,106);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  .action-buttons button:hover {
+    background-color: rgb(36, 85, 159);
+  }
+  
+  .quick-stats {
+    margin-bottom: 30px;
+  }
+  
+  .stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .stat-card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+  }
+  
+  .stat-card h3 {
+    margin-bottom: 10px;
+    color: rgb(24,57,106);
+  }
+  
+  .logout-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .logout-button:hover {
+    background-color: #c82333;
+  }
+  </style>
