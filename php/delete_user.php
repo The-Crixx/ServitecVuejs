@@ -7,22 +7,27 @@ include("conexion.php");
 
 // Decodifica los datos JSON enviados en la solicitud
 $data = json_decode(file_get_contents('php://input'), true);
-$id_comentario = $data['id'];
+$nctrl = $data['nctrl'];
 
 $response = [];
 
 try {
-    $query = "DELETE FROM comentarios WHERE id_comentario = ?";
+    // Prepara la consulta
+    $query = "DELETE FROM usuarios WHERE nctrl = ?";
     $stmt = $conn->prepare($query);
-    $stmt->execute([$id_comentario]);
+    $stmt->bind_param("s", $nctrl); // Vincula el parámetro (tipo "s" para string)
+    $stmt->execute();
 
-    if ($stmt->rowCount() > 0) {
+    // Verifica si se eliminó alguna fila
+    if ($stmt->affected_rows > 0) {
         $response['success'] = true;
     } else {
         $response['success'] = false;
-        $response['error'] = 'No se encontró el comentario con el ID proporcionado.';
+        $response['error'] = 'No se encontró el usuario con el número de control proporcionado.';
     }
-} catch (PDOException $e) {
+
+    $stmt->close(); // Cierra el statement
+} catch (Exception $e) {
     $response['success'] = false;
     $response['error'] = $e->getMessage();
 }
@@ -30,5 +35,5 @@ try {
 header('Content-Type: application/json');
 echo json_encode($response);
 
-$conn = null;
+$conn->close(); // Cierra la conexión
 ?>

@@ -55,21 +55,23 @@ export default {
 
     // Método para eliminar un usuario
     const deleteUser = async (nctrl) => {
-      if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-        try {
-          const response = await axios.post('http://localhost/vue/php/delete_user.php', { nctrl });
-          if (response.data.success) {
-            alert('Usuario eliminado correctamente');
-            // Elimina el usuario directamente de la tabla reactiva
-            users.data = users.data.filter(user => user.nctrl !== nctrl);
-          } else {
-            alert('Error al eliminar el usuario: ' + response.data.error);
-          }
-        } catch (error) {
-          console.error('Error al eliminar usuario:', error);
-        }
+  if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
+    try {
+      console.log('Eliminando usuario con número de control:', nctrl); // Verifica el número de control
+      const response = await axios.post('http://localhost/vue/php/delete_user.php', { nctrl });
+      console.log('Respuesta del servidor:', response.data); // Verifica la respuesta del servidor
+      if (response.data.success) {
+        alert('Usuario eliminado correctamente');
+        // Elimina el usuario directamente de la tabla reactiva
+        users.data = users.data.filter(user => user.nctrl !== nctrl);
+      } else {
+        alert('Error al eliminar el usuario: ' + response.data.error);
       }
-    };
+    } catch (error) {
+      console.error('Error al eliminar usuario:', error);
+    }
+  }
+};
 
     // Método para agregar un usuario directamente a la tabla
     const addUser = (newUser) => {

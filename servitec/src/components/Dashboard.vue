@@ -1,44 +1,45 @@
+<!-- filepath: c:\xampp\htdocs\vue\servitec\src\components\Dashboard.vue -->
 <template>
-    
-    
-    <div class="dashboard">
-      <Estructura />
-      <router-view></router-view>
-      <button @click="logout">Cerrar Sesión</button>
+  <div class="dashboard">
+    <!-- Menú de navegación -->
+    <Estructura />
+  </div>
+
+  <div class="router-container">
+      <router-view></router-view> 
     </div>
-  </template>
-  
-  <script setup>
-  import { useRouter, RouterView } from 'vue-router'
+</template>
+
+<script setup>
+import { useRouter } from 'vue-router'
 import Estructura from './estructura.vue'
+
+const router = useRouter()
+
+const logout = () => {
+  // Clear authentication token
+  localStorage.removeItem('authToken')
   
-  const router = useRouter()
-  
-  const logout = () => {
-    // Clear authentication token
-    localStorage.removeItem('authToken')
-    
-    // Redirect to login page
-    router.push('/')
-  }
-  </script>
-  
-  <style scoped>
-  .dashboard {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  
-  .dashboard button {
-    background-color: rgb(24,57,106);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-  }
-  </style>
+  // Redirect to login page
+  router.push('/')
+}
+</script>
+
+<style scoped>
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.router-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+</style>

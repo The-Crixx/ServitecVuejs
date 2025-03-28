@@ -12,7 +12,7 @@
     <div class="info-card slide-left">
       <h3 class="section-title">Ubicación</h3>
       <p>A continuación, se muestra una imagen con la ubicación del departamento:</p>
-      <img src="/img/lab.jpeg" alt="Ubicación del Departamento de Cómputo" class="location-image">
+      <img :src="require('@/assets/img/lab.jpeg')" alt="Ubicación del Departamento de Huertos Urbanos" class="location-image">
     </div>
     
     <div class="button-container">
@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'lab',
   data() {
     return {
       sections: [

@@ -64,19 +64,19 @@
   <style scoped>
   .admin-dashboard {
     background-color: white;
-    padding: 30px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    max-width: 800px;
+  
     width: 100%;
     text-align: center;
   }
   
   .admin-info {
     background-color: #f4f4f4;
-    padding: 15px;
+    padding: 10px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom:10px;
   }
   
   .admin-actions {
@@ -105,7 +105,7 @@
   }
   
   .quick-stats {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
   
   .stats-grid {

@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, RouterView } from 'vue-router';
 import { ref } from 'vue';
 
 const showDropdown = ref(false);
@@ -14,17 +14,15 @@ const showDropdown = ref(false);
         <div class="nav-links">
           <router-link to="/Dashboard" class="nav-link">Inicio</router-link>
           <div class="nav-link dropdown" @mouseover="showDropdown = true" @mouseleave="showDropdown = false">
-            Servicios
+            Departamentos
             <div v-if="showDropdown" class="dropdown-menu">
-              <router-link to="/dhuert" class="dropdown-item">Huertos Urbanos</router-link>
-              <router-link to="/dlab" class="dropdown-item">Laboratorio de Cómputo</router-link>
-              <router-link to="/divea" class="dropdown-item">IVEA</router-link>
-              <router-link to="/dbrig" class="dropdown-item">Brigadas</router-link>
+              <router-link to="/dashboard/dhuert" class="dropdown-item">Huertos Urbanos</router-link>
+              <router-link to="/dashboard/dlab" class="dropdown-item">Laboratorio de Cómputo</router-link>
+              <router-link to="/dashboard/divea" class="dropdown-item">IVEA</router-link>
+              <router-link to="/dashboard/dbrig" class="dropdown-item">Brigadas</router-link>
             </div>
           </div>
-          <router-link to="/agendar" class="nav-link">Agendar Cita</router-link>
-          <router-link to="/contacto" class="nav-link">Contacto</router-link>
-        </div>
+          </div>
         <router-link to="/" class="logout">Cerrar sesión</router-link>
       </nav>
     </header>
