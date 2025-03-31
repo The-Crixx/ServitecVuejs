@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1 class="department-title">Laboratorio de computo</h1>
     <div v-for="(section, index) in sections" :key="index" 
          :class="['info-card', index % 2 === 0 ? 'slide-left' : 'slide-right']">
       <h3 class="section-title">{{ section.title }}</h3>
@@ -12,11 +13,11 @@
     <div class="info-card slide-left">
       <h3 class="section-title">Ubicación</h3>
       <p>A continuación, se muestra una imagen con la ubicación del departamento:</p>
-      <img :src="require('@/assets/img/lab.jpeg')" alt="Ubicación del Departamento de Huertos Urbanos" class="location-image">
+      <img :src=" ('/img/lab.jpeg')" alt="Ubicación del Departamento de Huertos Urbanos" class="location-image">
     </div>
     
     <div class="button-container">
-      <router-link to="/" class="back-button">Regresar</router-link>
+      <router-link to="/dashboard" class="back-button">Regresar</router-link>
       <button @click="mostrarInteres" class="interest-button">Me interesa</button>
     </div>
   </div>
@@ -65,16 +66,26 @@ export default {
 </script>
 
 <style scoped>
+.department-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0d9488; /* Cambiar color del título */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 20px;
+  padding-top: 1100px;
+
 }
 
 .info-card {
-  width: 80%;
+  width: 1300px;
   padding: 20px;
   background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
   border-radius: 15px;

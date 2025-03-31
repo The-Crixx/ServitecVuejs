@@ -12,14 +12,14 @@ const showDropdown = ref(false);
       <nav class="navbar">
         <div class="logo">ServiTec</div>
         <div class="nav-links">
-          <router-link to="/Dashboard" class="nav-link">Inicio</router-link>
+          <router-link to="/dashboard" class="nav-link">Inicio</router-link>
           <div class="nav-link dropdown" @mouseover="showDropdown = true" @mouseleave="showDropdown = false">
             Departamentos
             <div v-if="showDropdown" class="dropdown-menu">
-              <router-link to="/dashboard/dhuert" class="dropdown-item">Huertos Urbanos</router-link>
-              <router-link to="/dashboard/dlab" class="dropdown-item">Laboratorio de Cómputo</router-link>
-              <router-link to="/dashboard/divea" class="dropdown-item">IVEA</router-link>
-              <router-link to="/dashboard/dbrig" class="dropdown-item">Brigadas</router-link>
+              <router-link to="/dhuert" class="dropdown-item">Huertos Urbanos</router-link>
+              <router-link to="/dlab" class="dropdown-item">Laboratorio de Cómputo</router-link>
+              <router-link to="/divea" class="dropdown-item">IVEA</router-link>
+              <router-link to="/dbrig" class="dropdown-item">Brigadas</router-link>
             </div>
           </div>
           </div>
@@ -33,7 +33,14 @@ const showDropdown = ref(false);
 .container {
   width: 100%;
   background-color: #0b3d91;
-  padding-bottom: 10px;
+  padding: 10px 0;
+  position: fixed; /* Fija la cabecera en la parte superior */
+  top: 0;
+  z-index: 1000; /* Asegura que esté por encima del contenido */
+}
+
+body {
+  margin-top: 120px; /* Ajustado para evitar que el contenido quede debajo del header */
 }
 
 .header {

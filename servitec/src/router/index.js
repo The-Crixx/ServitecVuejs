@@ -4,13 +4,14 @@ import Login from '../components/Login.vue'
 import Dashboard from '../components/Dashboard.vue'
 import Registro from '../components/Registro.vue'
 import Admin from '../components/Admin.vue'
-import Dbrig from '../components/dbrig.vue'
-import Dlab from '../components/dlab.vue'
-import Divea from '../components/divea.vue'
-import Dhuert from '../components/dhuert.vue'
+import dbrig from '../components/dbrig.vue'
+import divea from '../components/divea.vue'
+import dhuert from '../components/dhuert.vue'
 import Admincomment from '../components/Admincomment.vue'
 import AdminTabla from '../components/AdminTabla.vue'
 import Principal from '../components/Principal.vue'
+import docs from '../components/docs.vue'
+import dlab from '../components/dlab.vue'
 
 const routes = [
   {
@@ -24,29 +25,35 @@ const routes = [
     component: Dashboard,
     children: [
       {
-        path: '/principal',
+        path: '',
         name: 'Principal',
         component: Principal,
       },
       {
         path: '/dhuert',
-        name: 'Dhuert',
-        component: Dhuert,
+        name: 'dhuert',
+        component: dhuert,
       },
-      {
-        path: '/dlab',
-        name: 'Dlab',
-        component: Dlab,
-      },
+    
       {
         path: '/divea',
-        name: 'Divea',
-        component: Divea,
+        name: 'divea',
+        component: divea,
+      },
+      {
+        path: '/docs',
+        name: 'docs',
+        component: docs,
       },
       {
         path: '/dbrig',
-        name: 'Dbrig',
-        component: Dbrig,
+        name: 'dbrig',
+        component: dbrig,
+      },
+      {
+        path: '/dlab',
+        name: 'dlab',
+        component: dlab,
       }
     ]
   },

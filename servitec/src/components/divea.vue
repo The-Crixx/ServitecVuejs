@@ -14,11 +14,11 @@
       <div class="info-card slide-left">
         <h3 class="section-title">Ubicación</h3>
         <p>A continuación, se muestra una imagen con la ubicación del departamento:</p>
-        <img :src="require('@/assets/img/ivea.png')" alt="Ubicación del Departamento de Huertos Urbanos" class="location-image">
+        <img :src="('/img/ofi.jpeg')" alt="Ubicación del Departamento de Huertos Urbanos" class="location-image">
       </div>
   
       <div class="button-container">
-        <router-link to="/" class="back-button">Regresar</router-link>
+        <router-link to="/dashboard" class="back-button">Regresar</router-link>
         <button @click="mostrarInteres" class="interest-button">Me interesa</button>
       </div>
     </div>
@@ -72,6 +72,7 @@
     align-items: center;
     gap: 20px;
     padding: 20px;
+    padding-top: 1500px;
   }
   
   .department-title {

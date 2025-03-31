@@ -6,13 +6,15 @@
   </div>
 
   <div class="router-container">
-      <router-view></router-view> 
-    </div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router'
 import Estructura from './estructura.vue'
+import Principal from './Principal.vue'
+import dlab from './dlab.vue'
 
 const router = useRouter()
 

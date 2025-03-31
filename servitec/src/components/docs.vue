@@ -1,23 +1,25 @@
 <template>
-  <div class="container mx-auto p-6">
-    <div class="card">
-      <h1 class="title">Guía para el Registro del Servicio Social</h1>
-      <h2 class="subtitle">Instrucciones de los documentos requeridos</h2>
-      <div class="instructions">
-        <ol>
-          <li v-for="(doc, index) in documentos" :key="index">
-            {{ doc.nombre }}
-            <iframe class="pdf-viewer" :src="require(`/assets/docs/${doc.archivo}`)" frameborder="0"></iframe>
-          </li>
-        </ol>
+  <div class="main-container">
+    <div class="container mx-auto p-6">
+      <div class="card">
+        <h1 class="title">Guía para el Registro del Servicio Social</h1>
+        <h2 class="subtitle">Instrucciones de los documentos requeridos</h2>
+        <div class="instructions">
+          <ol class="pdf-list">
+            <li v-for="(doc, index) in documentos" :key="index" class="pdf-item">
+              {{ doc.nombre }}
+              <iframe class="pdf-viewer" :src="`/docs/${doc.archivo}`" frameborder="0"></iframe>
+            </li>
+          </ol>
+        </div>
+        <h2 class="subtitle">Ubicación del Departamento</h2>
+        <p>A continuación, se muestra una imagen con la ubicación del departamento:</p>
+        <div class="image-container">
+          <img src="/img/ofi.jpeg" alt="Ubicación de servicio social" class="location-image">
+        </div>
       </div>
-      <h2 class="subtitle">Ubicación del Departamento</h2>
-      <p>A continuación, se muestra una imagen con la ubicación del departamento:</p>
-      <div class="image-container">
-        <img src="./img/ofi.jpeg" alt="Ubicación de servicio social" class="location-image">
-      </div>
+      <router-link to="/dashboard" class="back-button">Regresar</router-link>
     </div>
-    <router-link to="/" class="back-button">Regresar</router-link>
   </div>
 </template>
 
@@ -41,12 +43,26 @@ export default {
 </script>
 
 <style scoped>
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f5f5f5; /* Fondo opcional */
+  min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  padding-top: 2300px;
+  width: 1450px;
+
+}
+
 .container {
-  max-width: 800px;
+  width: 1400px;
   margin: auto;
   padding: 20px;
   text-align: center;
 }
+
 .back-button {
   display: inline-block;
   padding: 10px 15px;
@@ -57,9 +73,11 @@ export default {
   margin-top: 20px;
   transition: background 0.3s;
 }
+
 .back-button:hover {
   background: #1e40af;
 }
+
 .card {
   background: white;
   padding: 20px;
@@ -68,23 +86,40 @@ export default {
   transition: transform 0.3s;
   margin-bottom: 20px;
 }
+
 .card:hover {
   transform: translateY(-5px);
 }
+
 .title {
   font-size: 1.8rem;
   font-weight: bold;
 }
+
 .subtitle {
   font-size: 1.4rem;
   margin-top: 10px;
 }
+
 .instructions ol {
   list-style-type: decimal;
   text-align: left;
   margin: auto;
   max-width: 600px;
 }
+
+.pdf-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.pdf-item {
+  flex: 1 1 calc(50% - 20px); /* Two items per row with a gap */
+  max-width: 600px;
+}
+
 .pdf-viewer {
   width: 100%;
   height: 400px;
@@ -92,17 +127,20 @@ export default {
   border: 1px solid #ddd;
   border-radius: 8px;
 }
+
 .image-container {
   margin-top: 10px;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
 }
+
 .location-image {
   width: 100%;
-  max-width: 600px;
+  max-width: 300px; /* Ajusta el tamaño de la imagen */
   transition: transform 0.3s ease-in-out;
 }
+
 .image-container:hover .location-image {
   transform: scale(1.1);
 }
